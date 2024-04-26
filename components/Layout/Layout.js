@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
     >
       <SettingConfig>
         <GlobalConfig>
-          {/* <HeaderV2 /> */}
+          <HeaderV2 />
 
           {/* <Header /> */}
           <Box
