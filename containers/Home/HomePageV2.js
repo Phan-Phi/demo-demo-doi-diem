@@ -31,15 +31,6 @@ const HomePageV2 = ({ initData }) => {
       <SEO {...getSeoObject(metaSeo)} />
       <HomeBanner data={metaData} />
 
-      {/* <TopBanner data={metaData} /> */}
-      {/* TODO:  Feature Request #60*/}
-      {/* <AboutExchangePoint data={metaData} /> */}
-      {/* <StoreBenefit data={metaData} /> */}
-      {/* <CustomerBenefit data={metaData} /> */}
-      {/* <BenefitPartner /> */}
-      {/* <Featured data={metaData} /> */}
-      {/* <News data={metaData} blogHomeData={blogHomeData} /> */}
-
       <WhyDoiDiem
         title={metaData.about_title}
         content={metaData.v2_about_content}
@@ -60,3 +51,27 @@ const HomePageV2 = ({ initData }) => {
 };
 
 export default HomePageV2;
+{
+  /* <TopBanner data={metaData} /> */
+}
+{
+  /* TODO:  Feature Request #60*/
+}
+{
+  /* <AboutExchangePoint data={metaData} /> */
+}
+{
+  /* <StoreBenefit data={metaData} /> */
+}
+{
+  /* <CustomerBenefit data={metaData} /> */
+}
+{
+  /* <BenefitPartner /> */
+}
+{
+  /* <Featured data={metaData} /> */
+}
+{
+  /* <News data={metaData} blogHomeData={blogHomeData} /> */
+}

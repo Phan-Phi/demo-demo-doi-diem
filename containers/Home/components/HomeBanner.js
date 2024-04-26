@@ -1,6 +1,7 @@
 import { get } from "lodash";
+import { useMeasure } from "react-use";
+import { useRouter } from "next/router";
 import { QRCodeCanvas } from "qrcode.react";
-import { useMeasure, useMedia } from "react-use";
 import { Box, Button, Container, Grid, Stack, styled } from "@mui/material";
 
 import { Image } from "HOC";
@@ -8,14 +9,13 @@ import { ReaderHTML } from "components/index";
 import { TOP_BANNER_RATIO1 } from "constants";
 
 import useSetting from "hooks/useSetting";
-import { useRouter } from "next/router";
 import EndPointScroll from "components/EndPointScroll";
 
 export default function HomeBanner({ data }) {
   const { push } = useRouter();
-  const [ref, { width }] = useMeasure();
   const setting = useSetting();
-  const { isMdDown, isLgDown, isSmDown } = useMedia();
+  const [ref, { width }] = useMeasure();
+
   const banner = get(data, "banner");
   const subtitle = get(data, "subtitle");
 

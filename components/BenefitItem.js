@@ -41,10 +41,11 @@ const WrapperTitleAndIconLeft = styled(Stack)(({ theme }) => {
 
     [theme.breakpoints.down("md")]: {
       flexDirection: "column",
-    },
+      marginLeft: 0,
 
-    [theme.breakpoints.down("sm")]: {
-      flexDirection: "column",
+      "& p": {
+        marginLeft: "0 !important",
+      },
     },
   };
 });
@@ -60,9 +61,15 @@ const WrapperTitleAndIconCenter = styled(Stack)(({ theme }) => {
 
     [theme.breakpoints.down("md")]: {
       flexDirection: "column",
+
+      "& p": {
+        textAlign: "center",
+        marginLeft: "0 !important",
+      },
     },
   };
 });
+
 const WrapperTitleAndIconRight = styled(Stack)(({ theme }) => {
   return {
     gap: "1rem",
@@ -74,6 +81,10 @@ const WrapperTitleAndIconRight = styled(Stack)(({ theme }) => {
     [theme.breakpoints.down("md")]: {
       gap: 0,
       flexDirection: "column",
+
+      "& p": {
+        marginLeft: "0 !important",
+      },
     },
   };
 });
@@ -123,13 +134,14 @@ const TitleItem = styled(Typography)(({ theme }) => {
   return {
     ...theme.typography.button2,
     fontSize: "18px",
+    lineHeight: "20px",
     color: theme.palette.primary.main,
 
     [theme.breakpoints.down("md")]: {
       display: "-webkit-box",
       WebkitLineClamp: 2,
       WebkitBoxOrient: "vertical",
-      minHeight: 16 * 2,
+      minHeight: 20 * 2,
       overflow: "hidden",
       textAlign: "center",
       marginTop: "0.5rem !important",

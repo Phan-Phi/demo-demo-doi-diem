@@ -11,11 +11,11 @@ import {
 import Slider from "react-slick";
 import { useCallback, useMemo, useRef, useState } from "react";
 
+import useMedia from "hooks/useMedia";
 import HomeTitle from "components/Title/HomeTitle";
 
 import { Image } from "HOC";
 import { ReaderHTML } from "components/index";
-import useMedia from "hooks/useMedia";
 
 const IMAGE_FRAME_RATIO = 390 / 790;
 const IMAGE_RATIO = 351 / 767;
@@ -108,12 +108,17 @@ export default function FeaturedV2({ title, data }) {
                 </TimeLine>
 
                 <Accordion
+                  className="asdasdasdasd"
                   onClick={() => SlickToPage(idx)}
                   expanded={expanded === idx}
                   onChange={toggleAccordionHandler(idx)}
                   elevation={0}
                   sx={{
                     border: "none",
+                    marginBottom:
+                      tutorial_content.length === indexItem
+                        ? "0 !important"
+                        : "1.5rem",
                     ["&.Mui-expanded"]: {
                       margin: 0,
                     },

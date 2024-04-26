@@ -51,48 +51,27 @@ export default function SlickWhyDoiDiem({ data }) {
       <Slider {...settings}>{render}</Slider>
 
       <WrapperImg>
-        <Image
-          {...{
-            src: "/img/shadow.png",
-            objectFit: "cover",
-            width: isMdDown ? "60px" : "100px",
-            height: height - 10,
-          }}
-        />
+        <ImageItem heightItem={height} media={isMdDown} />
       </WrapperImg>
 
-      <WrapperImgRight>
-        <Image
-          {...{
-            src: "/img/shadow.png",
-            objectFit: "cover",
-            width: isMdDown ? "60px" : "100px",
-            height: height - 10,
-          }}
-        />
-      </WrapperImgRight>
+      <WrapperImg isSpecial={true}>
+        <ImageItem heightItem={height} media={isMdDown} />
+      </WrapperImg>
     </WrapperSlick>
   );
 }
 
-const WrapperImg = styled(Box)(({ theme }) => {
+const WrapperImg = styled(Box, {
+  shouldForwardProp: (prop) => {
+    return prop !== "isSpecial";
+  },
+})(({ theme, isSpecial }) => {
   return {
     position: "absolute",
     top: 0,
-    left: 0,
-
-    [theme.breakpoints.down("sm")]: {
-      display: "none",
-    },
-  };
-});
-
-const WrapperImgRight = styled(Box)(({ theme }) => {
-  return {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    transform: "rotate(180deg) !important",
+    left: !isSpecial ? 0 : null,
+    right: isSpecial ? 0 : null,
+    transform: isSpecial ? "rotate(180deg) !important" : null,
 
     [theme.breakpoints.down("sm")]: {
       display: "none",
@@ -150,7 +129,7 @@ function PrevArrow({ onClick }) {
         justifyContent: "center",
         alignItems: "center",
         cursor: "pointer",
-        zIndex: 99,
+        zIndex: "9 !important",
         // borderRadius: "50%",
         // borderColor: "primary.light",
         // borderWidth: "2px",
@@ -164,7 +143,7 @@ function PrevArrow({ onClick }) {
         sx={{
           minWidth: 0,
           borderRadius: "50%",
-          zIndex: 99,
+          zIndex: 2,
         }}
       >
         <ArrowRightIcon
@@ -200,7 +179,8 @@ function NextArrow({ onClick }) {
         justifyContent: "center",
         alignItems: "center",
         cursor: "pointer",
-        zIndex: 1,
+        zIndex: "9 !important",
+
         // borderRadius: "50%",
         // borderColor: "primary.light",
         // borderWidth: "2px",
@@ -210,7 +190,14 @@ function NextArrow({ onClick }) {
       }}
       onClick={onClick}
     >
-      <Button sx={{ minWidth: 0, borderRadius: "50%" }}>
+      <Button
+        sx={{
+          minWidth: 0,
+          borderRadius: "50%",
+
+          zIndex: 2,
+        }}
+      >
         <ArrowRightIcon
           sx={{
             color: "#F7EDE3",
@@ -226,3 +213,16 @@ function NextArrow({ onClick }) {
     </Box>
   );
 }
+
+const ImageItem = ({ media, heightItem }) => {
+  return (
+    <Image
+      {...{
+        src: "/img/shadow.png",
+        objectFit: "cover",
+        width: media ? "60px" : "90px",
+        height: heightItem - 10,
+      }}
+    />
+  );
+};
