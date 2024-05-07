@@ -2,9 +2,10 @@ import { get, set } from "lodash";
 import { scroller } from "react-scroll";
 import { useRouter } from "next/router";
 import { useEffect, useState, Fragment, useMemo } from "react";
-import { useWindowScroll, useToggle, useMeasure } from "react-use";
+import { useWindowScroll, useToggle, useMeasure, useLocation } from "react-use";
 import { AppBar, Box, Typography, useTheme, Stack, Fade } from "@mui/material";
 
+import * as URI from "uri-js";
 import cloneDeep from "lodash/cloneDeep";
 
 import Link from "../Link";
@@ -33,6 +34,7 @@ const HeaderV2 = ({}) => {
   const { isMdUp } = useMedia();
   const { y } = useWindowScroll();
   const [ref, { height }] = useMeasure();
+  const { host } = useLocation();
 
   const [isToggle, setIsToggle] = useToggle(false);
   const [animationState, setAnimationState] = useState(false);
@@ -139,7 +141,12 @@ const HeaderV2 = ({}) => {
 
           <Stack direction={isMdUp ? "row" : "column"} gap={4}>
             {data.map((el, idx) => {
+              let url;
               const { block_type, value } = el;
+
+              if (block_type !== "by_section") {
+                url = URI.parse(value.link);
+              }
 
               if (value.nested_block !== undefined) {
                 if (value.nested_block.length > 0) {
@@ -156,6 +163,7 @@ const HeaderV2 = ({}) => {
                   return <MenuItemForHeaderApp value={value} key={idx} />;
                 }
               }
+              const urlOfPage = url ? url.path : "";
 
               return (
                 <Box
@@ -171,14 +179,14 @@ const HeaderV2 = ({}) => {
                     href={
                       block_type === "by_section"
                         ? `#${value.section}`
-                        : value.link
+                        : `http://${host}${urlOfPage}`
                     }
                     onClick={(e) => {
                       e.preventDefault();
                       const link =
                         block_type === "by_section"
                           ? `/#${value.section}`
-                          : value.link;
+                          : `http://${host}${urlOfPage}`;
 
                       // scrollTo(value.section);
                       router.push(link);
@@ -229,7 +237,7 @@ const HeaderV2 = ({}) => {
         </Stack>
       </Container>
     );
-  }, [transformedNavigation, isMdUp, setting, router, height]);
+  }, [transformedNavigation, isMdUp, setting, host, router, height]);
 
   const staticNav = useMemo(() => {
     if (y > 900) {

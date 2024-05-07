@@ -87,9 +87,9 @@ export default function FeaturedV2({ title, data }) {
     <WrapperContainer>
       <EndPointScroll
         name="tutorial"
-        numberMd={4}
-        numberXl={29}
-        numberSm={4.5}
+        numberMd={37}
+        numberXl={39}
+        numberSm={64}
       />
 
       <BoxAos styleAOS="fade-up">

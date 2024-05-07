@@ -29,78 +29,57 @@ export default function HomeBanner({ data }) {
       <StyledGrid container>
         <Grid item xs={12} sm={5} md={6}>
           <BoxAos styleAOS="zoom-in">
-            <WrapperTitle>
-              <ReaderHTML data={{ content: subtitle }} />
-            </WrapperTitle>
+            <WrapperContent>
+              <WrapperTitle>
+                <ReaderHTML data={{ content: subtitle }} />
+              </WrapperTitle>
 
-            <Stack
-              direction="row"
-              spacing={1}
-              ref={refImage}
-              width="fit-content"
-              marginBottom={2.5}
-            >
-              <Link target="_blank" href={setting.ios_customer}>
-                <Image
-                  {...{
-                    src: "/icon_apple.png",
-                    width: "116px",
-                    height: "32px",
-                    objectFit: "contain",
-                  }}
-                />
-              </Link>
+              <Stack
+                direction="row"
+                spacing={1}
+                ref={refImage}
+                width="fit-content"
+                marginBottom={2.5}
+              >
+                <Link target="_blank" href={setting.ios_customer}>
+                  <Image
+                    {...{
+                      src: "/icon_apple.png",
+                      width: "116px",
+                      height: "32px",
+                      objectFit: "contain",
+                    }}
+                  />
+                </Link>
 
-              <Link target="_blank" href={setting.android_customer}>
-                <Image
-                  {...{
-                    src: "/icon_gg.png",
-                    width: "116px",
-                    height: "32px",
-                    objectFit: "contain",
-                  }}
-                />
-              </Link>
-
-              {/* <Stack spacing={2} sx={{}}>
-                <Btn
-                  onClick={() => {
-                    push(setting.android_customer);
-                  }}
-                  variant="contained"
-                >
-                  Andoird
-                </Btn>
-                <QRCodeCanvas size={150} value={setting.android_customer} />
+                <Link target="_blank" href={setting.android_customer}>
+                  <Image
+                    {...{
+                      src: "/icon_gg.png",
+                      width: "116px",
+                      height: "32px",
+                      objectFit: "contain",
+                    }}
+                  />
+                </Link>
               </Stack>
-              <Stack spacing={2} sx={{}}>
-                <Btn
-                  onClick={() => {
-                    push(setting.ios_customer);
-                  }}
-                  variant="contained"
-                >
-                  IOS
-                </Btn>
-                <QRCodeCanvas size={150} value={setting.ios_customer} />
-              </Stack> */}
-            </Stack>
 
-            <Box
-              sx={{
-                boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
-                width: "fit-content",
-              }}
-            >
-              <Image
-                {...{
-                  src: "/qrmerchant.png",
-                  width: widthIamge,
-                  height: widthIamge / RATIO_QR,
-                  objectFit: "contain",
+              <Box
+                sx={{
+                  boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+                  width: "fit-content",
                 }}
-              />
-            </Box>
+              >
+                <Image
+                  {...{
+                    src: "/qrmerchant.png",
+                    width: widthIamge,
+                    height: widthIamge / RATIO_QR,
+                    objectFit: "contain",
+                  }}
+                />
+              </Box>
+            </WrapperContent>
           </BoxAos>
         </Grid>
 
@@ -136,6 +115,17 @@ const Wrapper = styled(Container)(({ theme }) => {
   };
 });
 
+const WrapperContent = styled(Box)(({ theme }) => {
+  return {
+    display: "flex",
+    flexDirection: "column",
+
+    [theme.breakpoints.down("sm")]: {
+      alignItems: "center",
+    },
+  };
+});
+
 const StyledGrid = styled(Grid)(({ theme }) => {
   return {
     marginTop: "3rem",
@@ -143,19 +133,9 @@ const StyledGrid = styled(Grid)(({ theme }) => {
 
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column-reverse",
-    },
-  };
-});
-
-const Btn = styled(Button)(({ theme }) => {
-  return {
-    borderRadius: "0.8rem",
-    fontSize: "0.7rem",
-    height: "28px",
-
-    ["&:hover"]: {
-      backgroundColor: theme.palette.primary.light,
-      color: theme.palette.common.white,
+      alignItems: "center",
+      gap: "12px",
+      marginTop: "2rem",
     },
   };
 });
@@ -169,6 +149,11 @@ const WrapperTitle = styled(Box)(({ theme }) => {
       fontSize: "44px",
       fontWeight: "bold",
       lineHeight: "58px",
+
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "26px",
+        lineHeight: "40px",
+      },
     },
 
     "& p": {

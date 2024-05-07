@@ -2,18 +2,20 @@ import {
   Box,
   Grid,
   styled,
+  Checkbox,
   MenuItem,
   TextField,
   Container,
   Typography,
-  Checkbox,
 } from "@mui/material";
+import { omit } from "lodash";
 import { useCallback } from "react";
 import { useMountedState } from "react-use";
-import LoadingButton from "@mui/lab/LoadingButton";
 import { Controller, useForm } from "react-hook-form";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+
+import LoadingButton from "@mui/lab/LoadingButton";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import { SUBMISSIONS } from "../../apis";
 import { BUSINESS_TYPE } from "constants";
@@ -27,7 +29,6 @@ import useSetting from "hooks/useSetting";
 import WrapperQrImage from "./components/WrapperQrImage";
 import RegisterMobileApp from "./components/RegisterMobileApp";
 import InputPhoneNumber from "../../components/Input/InputPhoneNumber";
-import { omit } from "lodash";
 
 export default function Register({ initData }) {
   const setting = useSetting();

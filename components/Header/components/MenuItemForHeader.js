@@ -1,12 +1,15 @@
 import { useRouter } from "next/router";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import * as URI from "uri-js";
 
 import Link from "components/Link";
 import { Box, Stack, Typography, styled, useTheme } from "@mui/material";
+import { useLocation } from "react-use";
 
 export default function MenuItemForHeader({ value, lastIndex, idx }) {
   const router = useRouter();
   const theme = useTheme();
+  const { host } = useLocation();
 
   return (
     <StyledBox>
@@ -53,6 +56,8 @@ export default function MenuItemForHeader({ value, lastIndex, idx }) {
 
       <SubMenu className="SubMenu">
         {value.nested_block.map((el, idx) => {
+          const url = URI.parse(el.link);
+
           if (el.nested_block.length > 0) {
             if (el.link === "") {
               return (
@@ -64,6 +69,8 @@ export default function MenuItemForHeader({ value, lastIndex, idx }) {
 
                   <SubMenu2 className="submenu1">
                     {el.nested_block.map((el, idx) => {
+                      const url = URI.parse(el.link);
+
                       return (
                         <MenuItem key={idx}>
                           {el.link === "" ? (
@@ -71,7 +78,7 @@ export default function MenuItemForHeader({ value, lastIndex, idx }) {
                               {el.title}
                             </TextItemMenu>
                           ) : (
-                            <Link href={el.link}>
+                            <Link href={`http://${host}${url.path}`}>
                               <TextItemMenu variant="button2">
                                 {el.title}
                               </TextItemMenu>
@@ -85,12 +92,13 @@ export default function MenuItemForHeader({ value, lastIndex, idx }) {
               );
             }
           }
+
           return (
             <MenuItem key={idx}>
               {el.link === "" ? (
                 <TextItemMenu variant="button2">{el.title}</TextItemMenu>
               ) : (
-                <Link href={el.link}>
+                <Link href={`http://${host}${url.path}`}>
                   <TextItemMenu variant="button2">{el.title}</TextItemMenu>
                 </Link>
               )}
