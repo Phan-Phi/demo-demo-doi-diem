@@ -43,6 +43,12 @@ const Title = styled(Typography)(({ theme }) => {
     lineHeight: "42px",
     fontWeight: 700,
     color: "#512C24",
+    cursor: "pointer",
+    transition: "all 0.5s ease",
+
+    "&:hover": {
+      color: theme.palette.primary.main,
+    },
 
     [theme.breakpoints.down("md")]: {
       fontSize: "30px",

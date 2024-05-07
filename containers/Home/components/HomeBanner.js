@@ -5,16 +5,21 @@ import { QRCodeCanvas } from "qrcode.react";
 import { Box, Button, Container, Grid, Stack, styled } from "@mui/material";
 
 import { Image } from "HOC";
-import { ReaderHTML } from "components/index";
+import { Link, ReaderHTML } from "components/index";
 import { TOP_BANNER_RATIO1 } from "constants";
 
 import useSetting from "hooks/useSetting";
 import EndPointScroll from "components/EndPointScroll";
+import BoxAos from "components/AOS/BoxAOS";
+import WrapperQrImage from "containers/Register/components/WrapperQrImage";
+
+const RATIO_QR = 124 / 124;
 
 export default function HomeBanner({ data }) {
   const { push } = useRouter();
   const setting = useSetting();
   const [ref, { width }] = useMeasure();
+  const [refImage, { width: widthIamge }] = useMeasure();
 
   const banner = get(data, "banner");
   const subtitle = get(data, "subtitle");
@@ -23,47 +28,95 @@ export default function HomeBanner({ data }) {
     <Wrapper>
       <StyledGrid container>
         <Grid item xs={12} sm={5} md={6}>
-          <WrapperTitle>
-            <ReaderHTML data={{ content: subtitle }} />
-          </WrapperTitle>
+          <BoxAos styleAOS="zoom-in">
+            <WrapperTitle>
+              <ReaderHTML data={{ content: subtitle }} />
+            </WrapperTitle>
 
-          <Stack direction="row" spacing={2}>
-            <Stack spacing={1} sx={{}}>
-              <Btn
-                onClick={() => {
-                  push(setting.android_customer);
-                }}
-                variant="contained"
-              >
-                Andoird
-              </Btn>
-              <QRCodeCanvas value={setting.android_customer} />
+            <Stack
+              direction="row"
+              spacing={1}
+              ref={refImage}
+              width="fit-content"
+              marginBottom={2.5}
+            >
+              <Link target="_blank" href={setting.ios_customer}>
+                <Image
+                  {...{
+                    src: "/icon_apple.png",
+                    width: "116px",
+                    height: "32px",
+                    objectFit: "contain",
+                  }}
+                />
+              </Link>
+
+              <Link target="_blank" href={setting.android_customer}>
+                <Image
+                  {...{
+                    src: "/icon_gg.png",
+                    width: "116px",
+                    height: "32px",
+                    objectFit: "contain",
+                  }}
+                />
+              </Link>
+
+              {/* <Stack spacing={2} sx={{}}>
+                <Btn
+                  onClick={() => {
+                    push(setting.android_customer);
+                  }}
+                  variant="contained"
+                >
+                  Andoird
+                </Btn>
+                <QRCodeCanvas size={150} value={setting.android_customer} />
+              </Stack>
+              <Stack spacing={2} sx={{}}>
+                <Btn
+                  onClick={() => {
+                    push(setting.ios_customer);
+                  }}
+                  variant="contained"
+                >
+                  IOS
+                </Btn>
+                <QRCodeCanvas size={150} value={setting.ios_customer} />
+              </Stack> */}
             </Stack>
-            <Stack spacing={1} sx={{}}>
-              <Btn
-                onClick={() => {
-                  push(setting.ios_customer);
+
+            <Box
+              sx={{
+                boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+                width: "fit-content",
+              }}
+            >
+              <Image
+                {...{
+                  src: "/qrmerchant.png",
+                  width: widthIamge,
+                  height: widthIamge / RATIO_QR,
+                  objectFit: "contain",
                 }}
-                variant="contained"
-              >
-                IOS
-              </Btn>
-              <QRCodeCanvas value={setting.ios_customer} />
-            </Stack>
-          </Stack>
+              />
+            </Box>
+          </BoxAos>
         </Grid>
 
         <Grid item xs={12} sm={7} md={6} ref={ref} width="100%">
-          <WrapperImage>
-            <Image
-              {...{
-                src: banner,
-                width: "100%",
-                height: width / TOP_BANNER_RATIO1,
-                objectFit: "cover",
-              }}
-            />
-          </WrapperImage>
+          <BoxAos styleAOS="zoom-in">
+            <WrapperImage>
+              <Image
+                {...{
+                  src: banner,
+                  width: "100%",
+                  height: width / TOP_BANNER_RATIO1,
+                  objectFit: "contain",
+                }}
+              />
+            </WrapperImage>
+          </BoxAos>
         </Grid>
       </StyledGrid>
 
@@ -85,7 +138,7 @@ const Wrapper = styled(Container)(({ theme }) => {
 
 const StyledGrid = styled(Grid)(({ theme }) => {
   return {
-    marginTop: "1.5rem",
+    marginTop: "3rem",
     alignItems: "flex-end",
 
     [theme.breakpoints.down("sm")]: {
@@ -109,7 +162,23 @@ const Btn = styled(Button)(({ theme }) => {
 
 const WrapperTitle = styled(Box)(({ theme }) => {
   return {
-    marginBottom: "0.75rem",
+    marginBottom: "1.25rem",
+
+    "& h1": {
+      margin: "0",
+      fontSize: "44px",
+      fontWeight: "bold",
+      lineHeight: "58px",
+    },
+
+    "& p": {
+      marginTop: 0,
+      marginBottom: "0.5rem",
+
+      "& span": {
+        fontWeight: "lighter !important",
+      },
+    },
   };
 });
 

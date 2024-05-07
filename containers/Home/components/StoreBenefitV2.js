@@ -6,6 +6,7 @@ import BenefitItem from "components/BenefitItem";
 import HomeTitle from "components/Title/HomeTitle";
 import Slider from "react-slick";
 import EndPointScroll from "components/EndPointScroll";
+import BoxAos from "components/AOS/BoxAOS";
 
 const settings = {
   dots: false,
@@ -142,7 +143,6 @@ export default function StoreBenefitV2({ title, dataContent }) {
       <WrapperTitle direction="row">
         <HomeTitle title={title} />
       </WrapperTitle>
-
       <WrapperContent>
         {isSmUp && (
           <Grid container className="BenefitBottom" spacing={1.5}>
@@ -160,12 +160,12 @@ export default function StoreBenefitV2({ title, dataContent }) {
         )}
       </WrapperContent>
 
-      <EndPointScroll
+      {/* <EndPointScroll
         name="tutorial"
         numberMd={5}
         numberXl={7.5}
         numberSm={5.5}
-      />
+      /> */}
     </WrapperContainer>
   );
 }

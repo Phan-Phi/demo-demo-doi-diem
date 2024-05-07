@@ -2,9 +2,11 @@ import React from "react";
 import { PAGES, STORE_CATEGORIES, types } from "../../apis";
 import Register from "../../containers/Register/Register";
 import { prefetchData, transformUrl } from "../../libs";
+import RegisterV2 from "containers/Register/RegisterV2";
 
 export default function PageRegister({ ...props }) {
   return <Register {...props} />;
+  // return <RegisterV2 {...props} />;
 }
 
 export async function getServerSideProps({ params }) {

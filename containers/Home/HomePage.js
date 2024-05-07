@@ -25,7 +25,7 @@ const HomePage = ({ initData }) => {
   return (
     <Box>
       <SEO {...getSeoObject(metaSeo)} />
-      {/* <TopBanner data={metaData} /> */}
+      <TopBanner data={metaData} />
 
       {/* TODO:  Feature Request #60*/}
       {/* <AboutExchangePoint data={metaData} /> */}

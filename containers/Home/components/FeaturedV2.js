@@ -16,6 +16,8 @@ import HomeTitle from "components/Title/HomeTitle";
 
 import { Image } from "HOC";
 import { ReaderHTML } from "components/index";
+import EndPointScroll from "components/EndPointScroll";
+import BoxAos from "components/AOS/BoxAOS";
 
 const IMAGE_FRAME_RATIO = 390 / 790;
 const IMAGE_RATIO = 351 / 767;
@@ -49,7 +51,11 @@ export default function FeaturedV2({ title, data }) {
     return (event, newExpanded) => {
       setExpanded(newExpanded ? panel : false);
     };
-  });
+  }, []);
+
+  const toggleAccordionHandler2 = useCallback((panel) => {
+    setExpanded(panel);
+  }, []);
 
   const renderImage = useMemo(() => {
     return tutorial_content.map((el, idx) => {
@@ -79,63 +85,82 @@ export default function FeaturedV2({ title, data }) {
 
   return (
     <WrapperContainer>
-      <HomeTitle title={title} />
+      <EndPointScroll
+        name="tutorial"
+        numberMd={4}
+        numberXl={29}
+        numberSm={4.5}
+      />
+
+      <BoxAos styleAOS="fade-up">
+        <HomeTitle title={title} />
+      </BoxAos>
+
       <StyledStack flexDirection="row">
-        <Box className="slickImage">
-          <WrapperImage>
-            <Slider {...settings} ref={slickRef}>
-              {renderImage}
-            </Slider>
-            <StyledIphoneFrame className="iphone-frame"></StyledIphoneFrame>
-          </WrapperImage>
-        </Box>
+        <BoxAos styleAOS="fade-up">
+          <Box className="slickImage">
+            <WrapperImage>
+              <Slider {...settings} ref={slickRef}>
+                {renderImage}
+              </Slider>
+              <StyledIphoneFrame className="iphone-frame"></StyledIphoneFrame>
+            </WrapperImage>
+          </Box>
+        </BoxAos>
 
-        <Stack>
-          {tutorial_content.map((item, idx) => {
-            const { value } = item;
-            const indexItem = idx + 1;
+        <BoxAos styleAOS="fade-up">
+          <Stack>
+            {tutorial_content.map((item, idx) => {
+              const { value } = item;
+              const indexItem = idx + 1;
+              const active = expanded === idx;
 
-            return (
-              <WrapperAccordion direction="row" key={idx}>
-                <TimeLine>
-                  <TimeLineHeader>
-                    <Count>{idx + 1}</Count>
-                  </TimeLineHeader>
+              return (
+                <WrapperAccordion direction="row" key={idx}>
+                  <TimeLine
+                    onClick={() => {
+                      toggleAccordionHandler2(idx);
+                      SlickToPage(idx);
+                    }}
+                  >
+                    <TimeLineHeader isActive={active}>
+                      <Count isActive={active}>{idx + 1}</Count>
+                    </TimeLineHeader>
 
-                  {tutorial_content.length === indexItem ? null : (
-                    <Line className="AccordionLine" />
-                  )}
-                </TimeLine>
+                    {tutorial_content.length === indexItem ? null : (
+                      <Line className="AccordionLine" />
+                    )}
+                  </TimeLine>
 
-                <Accordion
-                  className="asdasdasdasd"
-                  onClick={() => SlickToPage(idx)}
-                  expanded={expanded === idx}
-                  onChange={toggleAccordionHandler(idx)}
-                  elevation={0}
-                  sx={{
-                    border: "none",
-                    marginBottom:
-                      tutorial_content.length === indexItem
-                        ? "0 !important"
-                        : "1.5rem",
-                    ["&.Mui-expanded"]: {
-                      margin: 0,
-                    },
-                  }}
-                >
-                  <StyledAccordionSummary>
-                    <Title>{value.title}</Title>
-                  </StyledAccordionSummary>
+                  <Accordion
+                    onClick={() => SlickToPage(idx)}
+                    expanded={active}
+                    onChange={toggleAccordionHandler(idx)}
+                    elevation={0}
+                    sx={{
+                      border: "none",
+                      marginBottom:
+                        tutorial_content.length === indexItem
+                          ? "0 !important"
+                          : "1.5rem",
+                      ["&.Mui-expanded"]: {
+                        margin: 0,
+                      },
+                    }}
+                  >
+                    <StyledAccordionSummary>
+                      <Title isActive={active}>{value.title}</Title>
+                    </StyledAccordionSummary>
 
-                  <AccordionDetails sx={{ border: "none", padding: 0 }}>
-                    <ReaderHTML data={{ content: value.description }} />
-                  </AccordionDetails>
-                </Accordion>
-              </WrapperAccordion>
-            );
-          })}
-        </Stack>
+                    <AccordionDetails sx={{ border: "none", padding: 0 }}>
+                      <ReaderHTML data={{ content: value.description }} />
+                    </AccordionDetails>
+                  </Accordion>
+                </WrapperAccordion>
+              );
+            })}
+          </Stack>
+        </BoxAos>
       </StyledStack>
     </WrapperContainer>
   );
@@ -147,16 +172,31 @@ const TimeLine = styled(Stack)(({ theme }) => {
   };
 });
 
-const TimeLineHeader = styled(Stack)(({ theme }) => {
+const TimeLineHeader = styled(Stack, {
+  shouldForwardProp: (prop) => {
+    return prop !== "isActive";
+  },
+})(({ theme, isActive }) => {
   return {
     justifyContent: "center",
     width: "40px",
     height: "40px",
-    background: "#8DD1C8",
+    background: isActive ? theme.palette.primary.main : "#8DD1C8",
     padding: "1rem",
     borderRadius: "50%",
     position: "relative",
     margin: "0 auto",
+    cursor: "pointer",
+
+    "&:hover": {
+      background: theme.palette.primary.main,
+      transition: "all 0.5s ease",
+
+      "& p": {
+        color: theme.palette.common.white,
+        transition: "all 0.5s ease",
+      },
+    },
   };
 });
 
@@ -236,10 +276,20 @@ const WrapperImage = styled(Box)(({ theme }) => {
   };
 });
 
-const Title = styled(Typography)(({ theme }) => {
+const Title = styled(Typography, {
+  shouldForwardProp: (prop) => {
+    return prop !== "isActive";
+  },
+})(({ theme, isActive }) => {
   return {
     fontSize: "1.5rem",
     fontWeight: 600,
+    color: isActive ? theme.palette.primary.main : theme.palette.common.black,
+    transition: "all 0.5s ease",
+
+    "&:hover": {
+      color: theme.palette.primary.main,
+    },
   };
 });
 
@@ -252,9 +302,14 @@ const Line = styled(Box)(({ theme }) => {
   };
 });
 
-const Count = styled(Typography)(({ theme }) => {
+const Count = styled(Typography, {
+  shouldForwardProp: (prop) => {
+    return prop !== "isActive";
+  },
+})(({ theme, isActive }) => {
   return {
     fontWeight: 700,
+    color: isActive ? theme.palette.common.white : theme.palette.common.black,
   };
 });
 

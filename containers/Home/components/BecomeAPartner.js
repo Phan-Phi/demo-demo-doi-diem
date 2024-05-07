@@ -1,6 +1,7 @@
-import { Button, Container, Typography, styled } from "@mui/material";
-import EndPointScroll from "components/EndPointScroll";
 import { useRouter } from "next/router";
+import { Button, Container, Typography, styled } from "@mui/material";
+
+import EndPointScroll from "components/EndPointScroll";
 
 export default function BecomeAPartner({ title }) {
   const { push } = useRouter();
@@ -17,12 +18,17 @@ export default function BecomeAPartner({ title }) {
 
 const Title = styled(Typography)(({ theme }) => {
   return {
+    cursor: "pointer",
     color: "#512C24",
     fontSize: "36px",
     lineHeight: "42px",
     fontWeight: 700,
     marginBottom: "1.25rem",
     textTransform: "full-size-kana !important",
+    transition: "all 0.5s ease",
+    "&:hover": {
+      color: theme.palette.primary.main,
+    },
 
     [theme.breakpoints.down("md")]: {
       fontSize: "30px",

@@ -6,6 +6,7 @@ import HomePageV2 from "containers/Home/HomePageV2";
 
 const Home = ({ ...props }) => {
   return <HomePageV2 {...props} />;
+  // return <HomePage {...props} />;
 };
 
 export default Home;

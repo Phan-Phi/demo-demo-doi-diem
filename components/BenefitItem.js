@@ -1,4 +1,4 @@
-import { Box, Grid, Stack, Typography, styled } from "@mui/material";
+import { Box, Stack, Typography, styled } from "@mui/material";
 
 import { Image } from "HOC";
 
@@ -9,7 +9,7 @@ export default function BenefitItem({
   type = "left",
 }) {
   return (
-    <WrapperBoxItem textAlign={type}>
+    <WrapperBoxItem textAlign={type} className="WrapperBoxItem">
       {type === "left" && (
         <WrapperTitleAndIconLeft direction="row" spacing={2}>
           <Items title={title} icon={icon} />
@@ -95,11 +95,16 @@ const WrapperBoxItem = styled(Box)(({ theme }) => {
       "linear-gradient(rgba(244, 244, 244, 0.4), rgba(244, 244, 244, 0.2))",
     backdropFilter: "blur(4px)",
     borderRadius: "10px",
-    // boxShadow:
-    //   "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px",
     padding: "1rem",
-
+    cursor: "pointer",
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+    transition: "all 0.3s",
+
+    "&:hover": {
+      background:
+        "linear-gradient(rgba(255, 185, 165, 0.2), rgba(255, 185, 165, 0.5))",
+      boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+    },
   };
 });
 

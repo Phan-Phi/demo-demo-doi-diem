@@ -1,5 +1,6 @@
 import { get } from "lodash";
 import { Box } from "@mui/material";
+import { useEffect, useState } from "react";
 
 import AboutExchangePoint from "./components/AboutExchangePoint";
 import CustomerBenefit from "./components/CustomerBenefit";
@@ -17,6 +18,8 @@ import BecomeAPartner from "./components/BecomeAPartner";
 import HomeBanner from "./components/HomeBanner";
 import StoreBenefitV2 from "./components/StoreBenefitV2";
 import FeaturedV2 from "./components/FeaturedV2";
+import BoxAos from "components/AOS/BoxAOS";
+import BrandV2 from "./components/BrandV2";
 
 const HomePageV2 = ({ initData }) => {
   const [homeData, blogHome, brandHome] = initData;
@@ -26,9 +29,24 @@ const HomePageV2 = ({ initData }) => {
   const brandHomeData = brandHome.items;
   const metaSeo = get(metaData, "meta");
 
+  const [state, setState] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      const element = document.getElementById("WrapperBodyContent");
+      if (element) {
+        element.style.height = "1px";
+        setState(true);
+      }
+    }, 1000);
+  }, []);
+
   return (
     <Box>
+      {/* <Box sx={{ height: "100vh" }} id="WrapperBodyContent"></Box> */}
+
       <SEO {...getSeoObject(metaSeo)} />
+
       <HomeBanner data={metaData} />
 
       <WhyDoiDiem
@@ -36,42 +54,24 @@ const HomePageV2 = ({ initData }) => {
         content={metaData.v2_about_content}
       />
 
-      <StoreBenefitV2
-        title={metaData.store_title}
-        dataContent={metaData.store_content}
-      />
+      <BoxAos styleAOS="fade-up">
+        <StoreBenefitV2
+          title={metaData.store_title}
+          dataContent={metaData.store_content}
+        />
+      </BoxAos>
 
       <FeaturedV2 title={metaData.tutorial_title} data={metaData} />
 
-      <BecomeAPartner title={metaData.partner_title} />
+      <BoxAos styleAOS="zoom-in">
+        <BecomeAPartner title={metaData.partner_title} />
+      </BoxAos>
 
-      <Brand data={metaData} brandHomeData={brandHomeData} />
+      <BoxAos styleAOS="fade-up">
+        <BrandV2 data={metaData} brandHomeData={brandHomeData} />
+      </BoxAos>
     </Box>
   );
 };
 
 export default HomePageV2;
-{
-  /* <TopBanner data={metaData} /> */
-}
-{
-  /* TODO:  Feature Request #60*/
-}
-{
-  /* <AboutExchangePoint data={metaData} /> */
-}
-{
-  /* <StoreBenefit data={metaData} /> */
-}
-{
-  /* <CustomerBenefit data={metaData} /> */
-}
-{
-  /* <BenefitPartner /> */
-}
-{
-  /* <Featured data={metaData} /> */
-}
-{
-  /* <News data={metaData} blogHomeData={blogHomeData} /> */
-}

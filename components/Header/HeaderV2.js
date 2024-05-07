@@ -55,7 +55,7 @@ const HeaderV2 = ({}) => {
 
   const scrollTo = (target) => {
     scroller.scrollTo(target, {
-      duration: 2000,
+      duration: 500,
       delay: 0,
       smooth: "easeInQuad",
     });
@@ -141,21 +141,6 @@ const HeaderV2 = ({}) => {
             {data.map((el, idx) => {
               const { block_type, value } = el;
 
-              // if (value.title === "Logo") {
-              //   return (
-              //     <Box key={idx}>
-              //       <Link href="/">
-              //         <Image
-              //           src={el.value.img}
-              //           width="90px"
-              //           height="90px"
-              //           objectFit="contain"
-              //         />
-              //       </Link>
-              //     </Box>
-              //   );
-              // }
-
               if (value.nested_block !== undefined) {
                 if (value.nested_block.length > 0) {
                   if (isMdUp) {
@@ -195,7 +180,7 @@ const HeaderV2 = ({}) => {
                           ? `/#${value.section}`
                           : value.link;
 
-                      scrollTo(value.section);
+                      // scrollTo(value.section);
                       router.push(link);
 
                       setIsToggle(false);
