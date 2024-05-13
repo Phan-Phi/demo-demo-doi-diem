@@ -23,6 +23,10 @@ export default function SlickWhyDoiDiem({ data }) {
     speed: 500,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    autoplay: false,
+    speed: 1000,
+    // autoplaySpeed: 1000,
+    cssEase: "linear",
 
     responsive: [
       {
@@ -218,7 +222,7 @@ const ImageItem = ({ media, heightItem }) => {
   return (
     <Image
       {...{
-        src: "/img/shadow.png",
+        src: "/img/shadowdoidiem-01.png",
         objectFit: "cover",
         width: media ? "60px" : "90px",
         height: heightItem - 10,

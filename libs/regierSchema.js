@@ -11,6 +11,10 @@ export const defaultValues = {
   address: "",
   business_type: "company",
   terms: false,
+  business_registration_id: "",
+  business_registration_date: null,
+  business_registration_place: "",
+  tax_id: "",
 };
 
 export const registerSchema = yupResolver(
@@ -50,5 +54,9 @@ export const registerSchema = yupResolver(
     address: string("Vui lòng nhập nội dung").required(),
     business_type: mixed(),
     terms: mixed(),
+    tax_id: string(),
+    business_registration_id: string(),
+    business_registration_date: mixed().nullable(),
+    business_registration_place: string(),
   })
 );

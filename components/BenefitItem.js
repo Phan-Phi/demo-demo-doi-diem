@@ -96,7 +96,7 @@ const WrapperBoxItem = styled(Box)(({ theme }) => {
     backdropFilter: "blur(4px)",
     borderRadius: "10px",
     padding: "1rem",
-    cursor: "pointer",
+    // cursor: "pointer",
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
     transition: "all 0.3s",
 
@@ -115,6 +115,7 @@ const Description = styled(Typography)(({ theme }) => {
     WebkitBoxOrient: "vertical",
     minHeight: 16 * 4,
     overflow: "hidden",
+    lineHeight: "22px",
   };
 });
 

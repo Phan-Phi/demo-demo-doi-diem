@@ -152,9 +152,9 @@ export default function FeaturedV2({ title, data }) {
                       <Title isActive={active}>{value.title}</Title>
                     </StyledAccordionSummary>
 
-                    <AccordionDetails sx={{ border: "none", padding: 0 }}>
+                    <WrapperAccordionDetails>
                       <ReaderHTML data={{ content: value.description }} />
-                    </AccordionDetails>
+                    </WrapperAccordionDetails>
                   </Accordion>
                 </WrapperAccordion>
               );
@@ -210,6 +210,20 @@ const WrapperAccordion = styled(Stack)(({ theme }) => {
   };
 });
 
+const WrapperAccordionDetails = styled(AccordionDetails)(({ theme }) => {
+  return {
+    border: "none",
+    padding: 0,
+
+    "& p": {
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "1rem",
+        margin: "0.2rem 0",
+      },
+    },
+  };
+});
+
 const StyledStack = styled(Stack)(({ theme }) => {
   return {
     gap: "2rem",
@@ -246,6 +260,12 @@ const StyledAccordionSummary = styled(AccordionSummary)(({ theme }) => {
     "& .MuiAccordionSummary-content": {
       alignItems: "center",
       margin: "0 !important",
+    },
+
+    "& p": {
+      [theme.breakpoints.down("sm")]: {
+        fontSize: "20px",
+      },
     },
   };
 });

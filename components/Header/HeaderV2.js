@@ -139,12 +139,16 @@ const HeaderV2 = ({}) => {
             </Box>
           )}
 
-          <Stack direction={isMdUp ? "row" : "column"} gap={4}>
+          <Stack
+            width={isMdUp ? "auto" : "100%"}
+            direction={isMdUp ? "row" : "column"}
+            gap={4}
+          >
             {data.map((el, idx) => {
               let url;
               const { block_type, value } = el;
 
-              if (block_type !== "by_section") {
+              if (block_type === "by_link") {
                 url = URI.parse(value.link);
               }
 

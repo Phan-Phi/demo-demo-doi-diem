@@ -159,13 +159,6 @@ export default function StoreBenefitV2({ title, dataContent }) {
           </WrapperSlick>
         )}
       </WrapperContent>
-
-      {/* <EndPointScroll
-        name="tutorial"
-        numberMd={5}
-        numberXl={7.5}
-        numberSm={5.5}
-      /> */}
     </WrapperContainer>
   );
 }

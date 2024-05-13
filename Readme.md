@@ -76,6 +76,10 @@
       - website ( string ): website `(không bắt buộc)`
       - address ( string ): địa chỉ `(bắt buộc)`
       - business_type ( string ): gồm các lựa chọn company, individual `(bắt buộc)`
+      - tax_id ( string ): mã số thuế
+      - business_registration_id ( string ): mã đăng ký kinh doanh
+      - business_registration_date ( datetime ): ngày đăng ký kinh doanh
+      - business_registration_place ( string ): nơi đăng ký kinh doanh
     - `response`:
       - Success: status code 200, data trả về là các field trên
       - Fail: status code 400, không có data trả về

@@ -83,6 +83,11 @@ const renderHTML = ({ data, sx = {}, containerWidth, ...props }) => {
               maxWidth: "100%",
               objectFit: "contain",
             },
+            ["& p"]: {
+              // [theme.breakpoints.down("sm")]: {
+              //   fontSize: "1rem",
+              // },
+            },
           },
           sx,
         ]}

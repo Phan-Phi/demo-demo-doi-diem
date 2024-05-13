@@ -1,8 +1,10 @@
 import React from "react";
-import { PAGES, STORE_CATEGORIES, types } from "../../apis";
-import Register from "../../containers/Register/Register";
+
 import { prefetchData, transformUrl } from "../../libs";
+import { PAGES, STORE_CATEGORIES, types } from "../../apis";
+
 import RegisterV2 from "containers/Register/RegisterV2";
+import Register from "../../containers/Register/Register";
 
 export default function PageRegister({ ...props }) {
   return <Register {...props} />;

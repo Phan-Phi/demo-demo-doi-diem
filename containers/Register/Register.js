@@ -8,8 +8,8 @@ import {
   Container,
   Typography,
 } from "@mui/material";
-import { omit } from "lodash";
 import { useCallback } from "react";
+import { get, omit, set } from "lodash";
 import { useMountedState } from "react-use";
 import { Controller, useForm } from "react-hook-form";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
@@ -27,6 +27,7 @@ import { registerSchema, defaultValues } from "../../libs/regierSchema";
 import axios from "../../axios.config";
 import useSetting from "hooks/useSetting";
 import WrapperQrImage from "./components/WrapperQrImage";
+import DatePicker from "components/DatePicker/DatePicker";
 import RegisterMobileApp from "./components/RegisterMobileApp";
 import InputPhoneNumber from "../../components/Input/InputPhoneNumber";
 
@@ -56,7 +57,7 @@ export default function Register({ initData }) {
     enqueueSnackbarWithError,
   } = useNotification();
 
-  const { handleSubmit, control, reset, watch, setValue } = useForm({
+  const { handleSubmit, control, reset, watch } = useForm({
     defaultValues,
     resolver: registerSchema,
   });
@@ -70,7 +71,39 @@ export default function Register({ initData }) {
 
         setLoadingNoti(true);
 
-        await axios.post(SUBMISSIONS, omit(data, "terms"));
+        if (watch("business_type") === "company") {
+          const cloneData = data;
+
+          set(
+            cloneData,
+            "business_registration_date",
+            get(cloneData, "business_registration_date").toISOString()
+          );
+
+          await axios.post(
+            SUBMISSIONS,
+            omit(
+              {
+                ...cloneData,
+                tax_id: "",
+              },
+              "terms"
+            )
+          );
+        } else {
+          await axios.post(
+            SUBMISSIONS,
+            omit(
+              {
+                ...data,
+                business_registration_id: "",
+                business_registration_date: null,
+                business_registration_place: "",
+              },
+              "terms"
+            )
+          );
+        }
 
         enqueueSnackbarWithSuccess(thank_you_text);
         reset(defaultValues, {
@@ -85,7 +118,7 @@ export default function Register({ initData }) {
         }
       }
     },
-    [executeRecaptcha]
+    [executeRecaptcha, watch]
   );
 
   return (
@@ -246,6 +279,79 @@ export default function Register({ initData }) {
                   );
                 }}
               />
+
+              {/* Fields for company */}
+              {watch("business_type") === "company" && (
+                <Box>
+                  <Controller
+                    name="business_registration_id"
+                    control={control}
+                    render={({
+                      field: { onChange, ref, value },
+                      fieldState: { error },
+                    }) => {
+                      return (
+                        <TextField
+                          value={value}
+                          error={!!error}
+                          inputRef={ref}
+                          onChange={onChange}
+                          label="Mã số giấy phép kinh doanh"
+                        />
+                      );
+                    }}
+                  />
+
+                  <DatePicker
+                    label="Ngày cấp"
+                    control={control}
+                    name="business_registration_date"
+                  />
+
+                  <Controller
+                    name="business_registration_place"
+                    control={control}
+                    render={({
+                      field: { onChange, ref, value },
+                      fieldState: { error },
+                    }) => {
+                      return (
+                        <TextField
+                          value={value}
+                          error={!!error}
+                          label="Nơi cấp"
+                          inputRef={ref}
+                          onChange={onChange}
+                        />
+                      );
+                    }}
+                  />
+                </Box>
+              )}
+
+              {/* Fields for individual */}
+              {watch("business_type") === "individual" && (
+                <Box>
+                  <Controller
+                    name="tax_id"
+                    control={control}
+                    render={({
+                      field: { onChange, ref, value },
+                      fieldState: { error },
+                    }) => {
+                      return (
+                        <TextField
+                          value={value}
+                          error={!!error}
+                          label="Mã số thuế cá nhân"
+                          inputRef={ref}
+                          onChange={onChange}
+                        />
+                      );
+                    }}
+                  />
+                </Box>
+              )}
 
               <Controller
                 name="terms"

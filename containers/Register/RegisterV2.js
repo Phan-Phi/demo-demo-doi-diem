@@ -28,6 +28,8 @@ import WrapperQrImage from "./components/WrapperQrImage";
 import RegisterMobileApp from "./components/RegisterMobileApp";
 import InputPhoneNumber from "../../components/Input/InputPhoneNumber";
 import { omit } from "lodash";
+import DateRangePicker from "components/Input/DateRangePicker";
+import TaxID from "components/Input/TaxID";
 
 export default function RegisterV2({ initData }) {
   const setting = useSetting();
@@ -255,17 +257,7 @@ export default function RegisterV2({ initData }) {
                     fieldState: { error },
                   }) => {
                     return (
-                      <TextField
-                        sx={{
-                          "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
-                            {
-                              display: "none",
-                            },
-                          "& input[type=number]": {
-                            MozAppearance: "textfield",
-                          },
-                        }}
-                        type="number"
+                      <TaxID
                         error={!!error}
                         label="Mã số thuế cá nhân"
                         value={value}
@@ -280,15 +272,14 @@ export default function RegisterV2({ initData }) {
               {watch("business_type") === "company" && (
                 <>
                   <Controller
-                    name="code"
+                    name="code2"
                     control={control}
                     render={({
                       field: { onChange, ref, value },
                       fieldState: { error },
                     }) => {
                       return (
-                        <TextField
-                          // type="number"
+                        <TaxID
                           error={!!error}
                           label="Mã số giấy phép kinh doanh"
                           value={value}
@@ -299,27 +290,30 @@ export default function RegisterV2({ initData }) {
                     }}
                   />
 
-                  {/* <Controller
-                      name="date"
-                      control={control}
-                      render={({
-                        field: { onChange, ref, value },
-                        fieldState: { error },
-                      }) => {
-                        return (
-                          <DemoItem
-                            label={
-                              <Label
-                                componentName="DatePicker"
-                                valueType="date"
-                              />
-                            }
-                          >
-                            <DatePicker />
-                          </DemoItem>
-                        );
-                      }}
-                    /> */}
+                  <Controller
+                    name="datatime"
+                    control={control}
+                    render={({
+                      field: { onChange, ref, value },
+                      fieldState: { error },
+                    }) => {
+                      return (
+                        <DateRangePicker
+                          label="Ngày đăng ký"
+                          value={value}
+                          onChange={onChange}
+                        />
+
+                        // <TaxID
+                        //   error={!!error}
+                        //   label="Mã số giấy phép kinh doanh"
+                        //   value={value}
+                        //   onChange={onChange}
+                        //   inputRef={ref}
+                        // />
+                      );
+                    }}
+                  />
                 </>
               )}
 

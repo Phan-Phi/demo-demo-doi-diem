@@ -20,7 +20,7 @@ const CardBrand = ({ data }) => {
             "linear-gradient(rgba(244, 244, 244, 0.4), rgba(244, 244, 244, 0.2))",
           backdropFilter: "blur(4px)",
           border: "1px solid rgba(255, 255, 255, 0.2)",
-          boxShadow: " 0px 4px 10px rgba(0, 0, 0, 0.15)",
+          boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
         },
       ]}
     >
@@ -47,7 +47,6 @@ const CardBrand = ({ data }) => {
               <Image src={data.image} height="5rem" objectFit="contain" />
             </Box>
           </Box>
-
           <Box
             sx={{
               marginTop: 1,

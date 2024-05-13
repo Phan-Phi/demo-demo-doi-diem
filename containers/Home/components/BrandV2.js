@@ -27,7 +27,6 @@ const settings = {
       settings: {
         slidesToShow: 1,
         slidesToScroll: 1,
-        centerMode: true,
       },
     },
     {
@@ -35,7 +34,6 @@ const settings = {
       settings: {
         slidesToShow: 2,
         slidesToScroll: 1,
-        centerMode: true,
       },
     },
     {
@@ -43,11 +41,113 @@ const settings = {
       settings: {
         slidesToShow: 3,
         slidesToScroll: 1,
-        centerMode: true,
       },
     },
   ],
 };
+
+export default function BrandV2({ data, brandHomeData }) {
+  const slickRef = useRef();
+  const { partner_title } = data;
+  const { isSmDown, isSmUp, isMdDown } = useMedia();
+
+  const renderCardBrand = useMemo(() => {
+    return brandHomeData.map((item, index) => {
+      if (isSmUp) {
+        return (
+          <Grid item key={index} sm={6} md={3}>
+            <CardBrand data={item} />
+          </Grid>
+        );
+      } else {
+        return (
+          <Grid item key={index} xs={6}>
+            <CardBrand data={item} />
+          </Grid>
+        );
+      }
+    });
+  }, [brandHomeData, isSmUp]);
+
+  // useEffect(() => {
+  //   if (slickRef.current) {
+  //     slickRef.current.innerSlider.list.style.padding = "0 75px 0 0";
+  //   }
+  // }, [slickRef, isMdDown]);
+
+  return (
+    <WrapperContainer>
+      <EndPointScroll name="partner" numberMd={4} numberXl={30} numberSm={28} />
+
+      <WrapperTitleAndButton direction="row">
+        <HomeTitle isBtn={true} url="/doi-tac" title={partner_title} />
+      </WrapperTitleAndButton>
+
+      <Grid item xs={12}>
+        <Box
+          sx={{
+            overflowX: "hidden",
+
+            "& .slick-slide": {
+              width: "100%",
+              margin: "0 10px",
+              paddingBottom: 2,
+            },
+            "& button": {
+              display: "none",
+            },
+            "& .slick-track": {
+              display: "flex",
+            },
+          }}
+        >
+          <StyledSlider ref={slickRef} {...settings}>
+            {renderCardBrand}
+          </StyledSlider>
+        </Box>
+      </Grid>
+
+      {/* {isSmDown && <Btn variant="contained">Xem Thêm</Btn>} */}
+    </WrapperContainer>
+  );
+}
+
+const WrapperContainer = styled(Container)(({ theme }) => {
+  return {
+    paddingBottom: "3rem",
+    position: "relative",
+    textAlign: "center",
+  };
+});
+
+const StyledSlider = styled(Slider)(({ theme }) => {
+  return {
+    "& .slick-track": {
+      paddingTop: "1rem",
+    },
+  };
+});
+
+const WrapperTitleAndButton = styled(Stack)(({ theme }) => {
+  return {
+    justifyContent: "space-between",
+    alignItems: "center",
+  };
+});
+
+const Btn = styled(Button)(({ theme }) => {
+  return {
+    textTransform: "none !important",
+    fontSize: "14px",
+    height: "34px",
+
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "12px",
+      height: "30px",
+      // width: "px",
+    },
+  };
+});
 
 // export default function Brand({ data, brandHomeData }) {
 //   const slickRef = useRef();
@@ -184,98 +284,3 @@ const settings = {
 //     zIndex: -1,
 //   };
 // });
-
-export default function BrandV2({ data, brandHomeData }) {
-  const slickRef = useRef();
-  const { partner_title } = data;
-  const { isSmDown, isSmUp, isMdDown } = useMedia();
-
-  const renderCardBrand = useMemo(() => {
-    return brandHomeData.map((item, index) => {
-      if (isSmUp) {
-        return (
-          <Grid item key={index} sm={6} md={3}>
-            <CardBrand data={item} />
-          </Grid>
-        );
-      } else {
-        return (
-          <Grid item key={index} xs={6}>
-            <CardBrand data={item} />
-          </Grid>
-        );
-      }
-    });
-  }, [brandHomeData, isSmUp]);
-
-  useEffect(() => {
-    if (slickRef.current) {
-      slickRef.current.innerSlider.list.style.padding = "0 75px 0 0";
-    }
-  }, [slickRef, isMdDown]);
-
-  return (
-    <WrapperContainer>
-      <EndPointScroll name="partner" numberMd={4} numberXl={29} numberSm={27} />
-
-      <WrapperTitleAndButton direction="row">
-        <HomeTitle isBtn={true} url="/doi-tac" title={partner_title} />
-      </WrapperTitleAndButton>
-
-      <Grid item xs={12}>
-        <Box
-          sx={{
-            overflowX: "hidden",
-
-            "& .slick-slide": {
-              width: "100%",
-              margin: "0 10px",
-              paddingBottom: 2,
-            },
-            "& button": {
-              display: "none",
-            },
-            "& .slick-track": {
-              display: "flex",
-            },
-          }}
-        >
-          <Slider ref={slickRef} {...settings}>
-            {renderCardBrand}
-          </Slider>
-        </Box>
-      </Grid>
-
-      {/* {isSmDown && <Btn variant="contained">Xem Thêm</Btn>} */}
-    </WrapperContainer>
-  );
-}
-
-const WrapperContainer = styled(Container)(({ theme }) => {
-  return {
-    paddingBottom: "3rem",
-    position: "relative",
-    textAlign: "center",
-  };
-});
-
-const WrapperTitleAndButton = styled(Stack)(({ theme }) => {
-  return {
-    justifyContent: "space-between",
-    alignItems: "center",
-  };
-});
-
-const Btn = styled(Button)(({ theme }) => {
-  return {
-    textTransform: "none !important",
-    fontSize: "14px",
-    height: "34px",
-
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "12px",
-      height: "30px",
-      // width: "px",
-    },
-  };
-});
