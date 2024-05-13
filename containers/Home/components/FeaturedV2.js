@@ -18,6 +18,7 @@ import { Image } from "HOC";
 import { ReaderHTML } from "components/index";
 import EndPointScroll from "components/EndPointScroll";
 import BoxAos from "components/AOS/BoxAOS";
+// import { useWindowSize } from "react-use";
 
 const IMAGE_FRAME_RATIO = 390 / 790;
 const IMAGE_RATIO = 351 / 767;
@@ -34,6 +35,7 @@ const settings = {
 };
 
 export default function FeaturedV2({ title, data }) {
+  // const { width, height } = useWindowSize();
   const slickRef = useRef();
   const { isSmDown } = useMedia();
   const [expanded, setExpanded] = useState(0);
@@ -89,7 +91,7 @@ export default function FeaturedV2({ title, data }) {
         name="tutorial"
         numberMd={37}
         numberXl={39}
-        numberSm={64}
+        numberSm={59}
       />
 
       <BoxAos styleAOS="fade-up">

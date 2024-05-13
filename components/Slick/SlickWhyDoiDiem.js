@@ -23,7 +23,7 @@ export default function SlickWhyDoiDiem({ data }) {
     speed: 500,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
-    autoplay: false,
+    autoplay: true,
     speed: 1000,
     // autoplaySpeed: 1000,
     cssEase: "linear",
@@ -87,6 +87,11 @@ const WrapperSlick = styled(Box)(({ theme }) => {
   return {
     position: "relative",
     "& .slick-slider": {
+      "& .slick-list": {
+        // paddingTop: "1rem !important",
+        // paddingBottom: "0.7rem !important",
+      },
+
       "& .arrow": {
         [theme.breakpoints.down("sm")]: {
           display: "none",

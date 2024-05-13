@@ -42,6 +42,12 @@ const WrapperContent = styled(Stack)(({ theme }) => {
     background:
       "linear-gradient(rgba(244, 244, 244, 0.4), rgba(244, 244, 244, 0.2))",
     backdropFilter: "blur(4px)",
+    transition: "all 0.3s",
+
+    "&:hover": {
+      background:
+        "linear-gradient(rgba(255, 185, 165, 0.2), rgba(255, 185, 165, 0.5))",
+    },
 
     [theme.breakpoints.down("md")]: {
       "& img": {

@@ -69,11 +69,13 @@ export default function BrandV2({ data, brandHomeData }) {
     });
   }, [brandHomeData, isSmUp]);
 
-  // useEffect(() => {
-  //   if (slickRef.current) {
-  //     slickRef.current.innerSlider.list.style.padding = "0 75px 0 0";
-  //   }
-  // }, [slickRef, isMdDown]);
+  useEffect(() => {
+    if (isSmUp) {
+      if (slickRef.current) {
+        slickRef.current.innerSlider.list.style.padding = "0 75px 0 0";
+      }
+    }
+  }, [slickRef, isSmUp]);
 
   return (
     <WrapperContainer>

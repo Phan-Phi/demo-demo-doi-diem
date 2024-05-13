@@ -23,11 +23,11 @@ export default function WhyDoiDiem({ content, title }) {
 
 const WrapperContainer = styled(Container)(({ theme }) => {
   return {
-    paddingBottom: "6rem",
+    paddingBottom: "4rem",
     position: "relative",
 
     [theme.breakpoints.down("sm")]: {
-      paddingBottom: "2rem",
+      paddingBottom: "1rem",
     },
   };
 });

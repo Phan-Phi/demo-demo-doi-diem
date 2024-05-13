@@ -14,7 +14,7 @@ const settings = {
   speed: 200,
   slidesToShow: 1,
   slidesToScroll: 1,
-  autoplay: false,
+  autoplay: true,
   autoplaySpeed: 3000,
   centerMode: true,
   centerPadding: "30px",
@@ -143,6 +143,7 @@ export default function StoreBenefitV2({ title, dataContent }) {
       <WrapperTitle direction="row">
         <HomeTitle title={title} />
       </WrapperTitle>
+
       <WrapperContent>
         {isSmUp && (
           <Grid container className="BenefitBottom" spacing={1.5}>
@@ -165,7 +166,7 @@ export default function StoreBenefitV2({ title, dataContent }) {
 
 const WrapperContainer = styled(Container)(({ theme }) => {
   return {
-    paddingBottom: "3rem",
+    paddingBottom: "4rem",
     position: "relative",
 
     [theme.breakpoints.down("sm")]: {
@@ -184,7 +185,7 @@ const WrapperTitle = styled(Stack)(({ theme }) => {
 const WrapperContent = styled(Box)(({ theme }) => {
   return {
     [theme.breakpoints.down("sm")]: {
-      // padding: " 0 1.5rem",
+      // padding: "1rem 0",
     },
   };
 });
@@ -192,6 +193,10 @@ const WrapperContent = styled(Box)(({ theme }) => {
 const WrapperSlick = styled(Box)(({ theme }) => {
   return {
     overflowX: "hidden",
+    "& .slick-list": {
+      paddingTop: "8px",
+      paddingBottom: "8px",
+    },
 
     "& .slick-slide": {
       width: "100%",
