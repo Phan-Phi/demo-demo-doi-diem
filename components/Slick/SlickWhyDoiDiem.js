@@ -26,6 +26,7 @@ export default function SlickWhyDoiDiem({ data }) {
     // speed: 300,
     autoplaySpeed: 5000,
     cssEase: "linear",
+    // arrows:false,
 
     responsive: [
       {
@@ -47,19 +48,19 @@ export default function SlickWhyDoiDiem({ data }) {
     return data?.map((item, idx) => {
       return <ItemSlickWhyDoiDiem data={item} key={idx} />;
     });
-  }, []);
+  }, [data]);
 
   return (
     <WrapperSlick ref={ref}>
       <Slider {...settings}>{render}</Slider>
 
-      <WrapperImg>
+      {/* <WrapperImg>
         <ImageItem heightItem={height} media={isMdDown} />
       </WrapperImg>
 
       <WrapperImg isSpecial={true}>
         <ImageItem heightItem={height} media={isMdDown} />
-      </WrapperImg>
+      </WrapperImg> */}
     </WrapperSlick>
   );
 }

@@ -30,7 +30,7 @@ export default function HomeBanner({ data }) {
         <Grid item xs={12} sm={5} md={6}>
           <BoxAos styleAOS="zoom-in">
             <WrapperContent>
-              <WrapperTitle className="asdasd">
+              <WrapperTitle>
                 <ReaderHTML data={{ content: subtitle }} />
               </WrapperTitle>
 

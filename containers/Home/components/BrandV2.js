@@ -11,7 +11,7 @@ import { Image } from "../../../HOC";
 import EndPointScroll from "components/EndPointScroll";
 
 const settings = {
-  dots: false,
+  dots: true,
   infinite: true,
   speed: 200,
   slidesToShow: 3,
@@ -86,30 +86,12 @@ export default function BrandV2({ data, brandHomeData }) {
       </WrapperTitleAndButton>
 
       <Grid item xs={12}>
-        <Box
-          sx={{
-            overflowX: "hidden",
-
-            "& .slick-slide": {
-              width: "100%",
-              margin: "0 10px",
-              paddingBottom: 2,
-            },
-            "& button": {
-              display: "none",
-            },
-            "& .slick-track": {
-              display: "flex",
-            },
-          }}
-        >
+        <WrapperStyledSlider className="asdasd">
           <StyledSlider ref={slickRef} {...settings}>
             {renderCardBrand}
           </StyledSlider>
-        </Box>
+        </WrapperStyledSlider>
       </Grid>
-
-      {/* {isSmDown && <Btn variant="contained">Xem Thêm</Btn>} */}
     </WrapperContainer>
   );
 }
@@ -137,16 +119,43 @@ const WrapperTitleAndButton = styled(Stack)(({ theme }) => {
   };
 });
 
-const Btn = styled(Button)(({ theme }) => {
+const WrapperStyledSlider = styled(Box)(({ theme }) => {
   return {
-    textTransform: "none !important",
-    fontSize: "14px",
-    height: "34px",
+    "& .slick-slide": {
+      width: "100%",
+      margin: "0 10px",
+      paddingBottom: 2,
+    },
 
-    [theme.breakpoints.down("sm")]: {
-      fontSize: "12px",
-      height: "30px",
-      // width: "px",
+    "& .slick-list": { paddingBottom: "0.8rem !important" },
+
+    "& button": {
+      display: "none",
+    },
+    "& .slick-track": {
+      display: "flex",
+    },
+
+    "& .slick-dots": {
+      "& li": {
+        margin: 0,
+      },
+      "& button:before": {
+        fontSize: "9px",
+        color: "#E27D61",
+        opacity: `1 !important`,
+      },
+
+      "& button:hover:before": {
+        color: "#512C24",
+        opacity: `0.5 !important`,
+      },
+
+      "& .slick-active": {
+        "& button:before": {
+          color: "#512C24",
+        },
+      },
     },
   };
 });
