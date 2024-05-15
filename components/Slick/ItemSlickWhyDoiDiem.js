@@ -60,22 +60,31 @@ const WrapperContent = styled(Stack)(({ theme }) => {
 
 const Title = styled(Typography)(({ theme }) => {
   return {
-    fontSize: "27px",
-    lineHeight: "35px",
+    fontSize: "23px",
+    lineHeight: "30px",
     fontWeight: 700,
     margin: "10px 0",
     color: theme.palette.primary.main,
-
     display: "-webkit-box",
-    WebkitLineClamp: 2,
+    WebkitLineClamp: 1,
     WebkitBoxOrient: "vertical",
-    minHeight: 35 * 2,
+    minHeight: 30 * 1,
     overflow: "hidden",
 
+    [theme.breakpoints.up("lg")]: {
+      fontSize: "26px",
+      lineHeight: "35px",
+    },
+
     [theme.breakpoints.down("md")]: {
+      fontSize: "22px",
+      lineHeight: "28px",
+    },
+
+    [theme.breakpoints.down("sm")]: {
       fontSize: "21px",
       lineHeight: "28px",
-      minHeight: 28 * 2,
+      minHeight: 28 * 1,
     },
   };
 });
