@@ -2,16 +2,25 @@ import { useRouter } from "next/router";
 import { Button, Container, Typography, styled } from "@mui/material";
 
 import EndPointScroll from "components/EndPointScroll";
+import BoxAos from "components/AOS/BoxAOS";
 
 export default function BecomeAPartner({ title }) {
   const { push } = useRouter();
 
   return (
     <Wrapper maxWidth="lg">
-      <Title>Sẵn sàng trở thành đối tác?</Title>
-      <Btn onClick={() => push("/dang-ky")} variant="contained">
-        Bắt đầu ngay!
-      </Btn>
+      <BoxAos styleAOS="zoom-in">
+        <Title>Sẵn sàng trở thành đối tác?</Title>
+      </BoxAos>
+      <BoxAos styleAOS="zoom-in">
+        <Btn
+          id={"partner"}
+          onClick={() => push("/dang-ky")}
+          variant="contained"
+        >
+          Bắt đầu ngay!
+        </Btn>
+      </BoxAos>
     </Wrapper>
   );
 }

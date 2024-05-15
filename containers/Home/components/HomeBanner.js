@@ -30,7 +30,7 @@ export default function HomeBanner({ data }) {
         <Grid item xs={12} sm={5} md={6}>
           <BoxAos styleAOS="zoom-in">
             <WrapperContent>
-              <WrapperTitle>
+              <WrapperTitle className="asdasd">
                 <ReaderHTML data={{ content: subtitle }} />
               </WrapperTitle>
 
@@ -64,12 +64,7 @@ export default function HomeBanner({ data }) {
                 </Link>
               </Stack>
 
-              <Box
-                sx={{
-                  boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
-                  width: "fit-content",
-                }}
-              >
+              <WrapperQR>
                 <Image
                   {...{
                     src: "/qrmerchant.png",
@@ -78,7 +73,7 @@ export default function HomeBanner({ data }) {
                     objectFit: "contain",
                   }}
                 />
-              </Box>
+              </WrapperQR>
             </WrapperContent>
           </BoxAos>
         </Grid>
@@ -111,6 +106,27 @@ const Wrapper = styled(Container)(({ theme }) => {
 
     [theme.breakpoints.down("sm")]: {
       marginBottom: "2rem",
+    },
+  };
+});
+
+const WrapperQR = styled(Box)(({ theme }) => {
+  return {
+    boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
+    width: "fit-content",
+    transition: "all 0.5s ease",
+    "& img": {
+      borderRadius: "1rem",
+    },
+
+    "&:hover": {
+      borderRadius: "1rem",
+      boxShadow:
+        "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
+
+      "& img": {
+        borderRadius: "1rem",
+      },
     },
   };
 });
@@ -149,10 +165,49 @@ const WrapperTitle = styled(Box)(({ theme }) => {
       fontSize: "44px",
       fontWeight: "bold",
       lineHeight: "58px",
+      backgroundImage:
+        "linear-gradient( to right, #54dfd7, #54dfd7 50%,#FF8259 50%)",
+
+      backgroundSize: "200% 100%",
+      backgroundPosition: "-100%",
+
+      display: "inline-block",
+      padding: "5px 0",
+      position: "relative",
+      WebkitBackgroundClip: "text",
+      // WebkitTextFillColor: "transparent",
+      transition: "all 0.3s ease-in-out",
+
+      "&::before": {
+        content: '""',
+        background: "#ffb25e",
+        display: "block",
+        position: "absolute",
+        bottom: "-3px",
+        left: 0,
+        width: 0,
+        height: "3px",
+        transition: "all 0.3s ease-in-out",
+      },
+
+      "&:hover": {
+        backgroundPosition: "0",
+        WebkitTextFillColor: "transparent",
+      },
+
+      "a:hover::before": {
+        width: "100%",
+        display: "none",
+      },
+
+      [theme.breakpoints.down("md")]: {
+        fontSize: "32px",
+        lineHeight: "36px",
+      },
 
       [theme.breakpoints.down("sm")]: {
         fontSize: "26px",
-        lineHeight: "40px",
+        lineHeight: "30px",
       },
     },
 

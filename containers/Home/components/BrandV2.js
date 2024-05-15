@@ -79,7 +79,7 @@ export default function BrandV2({ data, brandHomeData }) {
 
   return (
     <WrapperContainer>
-      <EndPointScroll name="partner" numberMd={4} numberXl={30} numberSm={28} />
+      {/* <EndPointScroll name="partner" numberMd={4} numberXl={30} numberSm={28} /> */}
 
       <WrapperTitleAndButton direction="row">
         <HomeTitle isBtn={true} url="/doi-tac" title={partner_title} />
