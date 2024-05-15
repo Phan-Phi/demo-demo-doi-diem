@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, styled, useTheme } from "@mui/material";
 
 import truncate from "lodash/truncate";
 
@@ -12,49 +12,20 @@ const CardBrand = ({ data }) => {
   const { isSmDown } = useMedia();
 
   return (
-    <Box
-      sx={[
-        {
-          borderRadius: "6px",
-          background:
-            "linear-gradient(rgba(244, 244, 244, 0.4), rgba(244, 244, 244, 0.2))",
-          backdropFilter: "blur(4px)",
-          border: "1px solid rgba(255, 255, 255, 0.2)",
-          boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-        },
-      ]}
-    >
+    <WrapperContainer>
       <Box
         sx={{
           padding: 2,
         }}
       >
         <Fragment>
-          <Box
-            sx={{
-              margin: "0 auto",
-              overflow: "hidden",
-              height: "5rem",
-              [theme.breakpoints.up("md")]: {
-                transition: "all 0.5s",
-                "&:hover": {
-                  transform: "scale(1.2)",
-                },
-              },
-            }}
-          >
+          <WrapperImage>
             <Box>
               <Image src={data.image} height="5rem" objectFit="contain" />
             </Box>
-          </Box>
-          <Box
-            sx={{
-              marginTop: 1,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
+          </WrapperImage>
+
+          <WrapperContent>
             <Typography
               variant="body2_bold"
               sx={{
@@ -67,20 +38,65 @@ const CardBrand = ({ data }) => {
                 : "Không Tích Điểm"}
             </Typography>
 
-            <Typography
-              variant="body2"
-              sx={{ minHeight: 72, maxHeight: 72, overflow: "hidden" }}
-            >
-              {truncate(data.description, {
+            <Description variant="body2">
+              {/* {truncate(data.description, {
                 length: 90,
                 separator: " ",
-              })}
-            </Typography>
-          </Box>
+              })} */}
+
+              {data.description}
+            </Description>
+          </WrapperContent>
         </Fragment>
       </Box>
-    </Box>
+    </WrapperContainer>
   );
 };
 
 export default CardBrand;
+
+const WrapperImage = styled(Box)(({ theme }) => {
+  return {
+    margin: "0 auto",
+    overflow: "hidden",
+    height: "5rem",
+
+    [theme.breakpoints.up("md")]: {
+      transition: "all 0.5s",
+      "&:hover": {
+        transform: "scale(1.2)",
+      },
+    },
+  };
+});
+
+const WrapperContent = styled(Box)(({ theme }) => {
+  return {
+    marginTop: 1,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  };
+});
+
+const Description = styled(Typography)(({ theme }) => {
+  return {
+    lineHeight: "22px",
+    display: "-webkit-box",
+    WebkitLineClamp: 3,
+    WebkitBoxOrient: "vertical",
+    minHeight: 22 * 3,
+    overflow: "hidden",
+  };
+});
+
+const WrapperContainer = styled(Box)(({ theme }) => {
+  return {
+    borderRadius: "6px",
+    background:
+      "linear-gradient(rgba(244, 244, 244, 0.4), rgba(244, 244, 244, 0.2))",
+    backdropFilter: "blur(4px)",
+    border: "1px solid rgba(255, 255, 255, 0.2)",
+    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+  };
+});

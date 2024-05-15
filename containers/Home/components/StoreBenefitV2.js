@@ -171,6 +171,7 @@ const WrapperContainer = styled(Container)(({ theme }) => {
 
     [theme.breakpoints.down("sm")]: {
       padding: "2.5rem 0",
+      paddingBottom: "1.5rem",
     },
   };
 });
@@ -195,7 +196,7 @@ const WrapperSlick = styled(Box)(({ theme }) => {
     overflowX: "hidden",
     "& .slick-list": {
       paddingTop: "8px",
-      paddingBottom: "8px",
+      paddingBottom: "1rem !important",
     },
 
     "& .slick-slide": {

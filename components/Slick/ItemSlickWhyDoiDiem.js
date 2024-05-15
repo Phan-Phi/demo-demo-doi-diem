@@ -60,15 +60,22 @@ const WrapperContent = styled(Stack)(({ theme }) => {
 
 const Title = styled(Typography)(({ theme }) => {
   return {
-    fontSize: "28px",
-    lineHeight: "37px",
+    fontSize: "27px",
+    lineHeight: "35px",
     fontWeight: 700,
     margin: "10px 0",
     color: theme.palette.primary.main,
 
+    display: "-webkit-box",
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: "vertical",
+    minHeight: 35 * 2,
+    overflow: "hidden",
+
     [theme.breakpoints.down("md")]: {
-      fontSize: "22px",
-      lineHeight: "30px",
+      fontSize: "21px",
+      lineHeight: "28px",
+      minHeight: 28 * 2,
     },
   };
 });
@@ -76,8 +83,14 @@ const Title = styled(Typography)(({ theme }) => {
 const Text = styled(Typography)(({ theme }) => {
   return {
     fontSize: "16px",
-    //   lineHeight: "37px",
     fontWeight: 400,
+    lineHeight: "22px",
+
+    display: "-webkit-box",
+    WebkitLineClamp: 3,
+    WebkitBoxOrient: "vertical",
+    minHeight: 22 * 3,
+    overflow: "hidden",
   };
 });
 

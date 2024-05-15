@@ -26,7 +26,7 @@ export default function SlickWhyDoiDiem({ data }) {
     // speed: 300,
     autoplaySpeed: 5000,
     cssEase: "linear",
-    // arrows:false,
+    arrows: false,
 
     responsive: [
       {
